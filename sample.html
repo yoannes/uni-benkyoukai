@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>new title</title>
+
+    <style>
+      #containerId {
+        margin: 10px 0 10px 0;
+        background-color: pink;
+        border: 1px solid black;
+        width: 300px;
+      }
+
+      .column {
+        background-color: green;
+        padding: 5px;
+      }
+
+      .green {
+        background-color: green;
+      }
+
+      .bold {
+        font-weight: bold;
+      }
+
+      .size {
+        font-size: 30px;
+      }
+    </style>
+
+  </head>
+  <body>
+    Bookshelf
+
+    <p>
+      Nice HTML site: https://www.w3schools.com/TAGS/default.ASP
+    </p>
+
+    <br />
+
+    <p>
+      <div style="font-size: 30px;">Text tags:</div>
+      <b>bold</b><br />
+      <i>italic</i><br />
+      <u>underline</u><br />
+    </p>
+
+    <ul>
+      <li>1</li>
+      <li>3</li>
+    </ul>
+
+    element attributes
+    
+    <div id="containerId" class="bold size">im a container</div>
+
+    <div>
+      <input type="text" id="text" />
+      <button id="button">button</button>
+      <div>
+        <input type="checkbox" id="checkbox" /> im a checkbox
+      </div>
+      <div>
+        <input type="radio" id="radio" /> im a radio
+      </div>
+
+    </div>
+
+    <div>
+      <a href="https://google.com">link</a>
+    </div>
+
+
+    Table:
+    <table border="1">
+      <tr>
+        <td id="00">A</td>
+        <td id="01" class="column">B</td>
+        <td id="02">C</td>
+        <td id="03">D</td>
+      </tr>
+      <tr>
+        <td id="10">A</td>
+        <td id="11">B</td>
+        <td id="12" class="column">C</td>
+        <td id="13">D</td>
+      </tr>
+      <tr>
+        <td id="20">A</td>
+        <td id="21">B</td>
+        <td id="22">C</td>
+        <td id="23">D</td>
+      </tr>
+    </table>
+
+    <script src="index.js"></script>
+  </body>
+</html>

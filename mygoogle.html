@@ -1,0 +1,128 @@
+<!-- // Homework for next class:
+// Today's Kadai
+// Make https://www.google.com/ website using only HTML and CSS -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myGoogle</title>
+
+    <style>
+      body {
+        background-color: #FFFFFF;
+      }
+
+      #googleContainerId {
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        width: 400px;
+      }
+      /* char1-id */
+      #char1Id {
+        color: #4285F4;
+        font-size: 120px;
+      }
+
+      #char2Id {
+        color: #EA4535;
+      }
+
+      #char3Id {
+        color: #F8BD32;
+      }
+
+      #char4Id {
+        color: #4285F4;
+      }
+
+      #char5Id {
+        color: #4FA954;
+      }
+
+      #char6Id {
+        color: #EA4535;
+      }
+
+      #textId {
+        width: 500px;
+        height: 40px;
+        border-radius: 20px;
+        border: solid 1px #DFE1E5;
+      }
+
+      #textId:hover {
+        box-shadow: 0 0 8px #DCDCDD;
+      }
+
+      #textId:focus {
+        box-shadow: 0 0 8px #DCDCDD;
+        outline: 0;
+      }
+
+      #textContainerId {
+        text-align: center;
+      }
+
+      .button-container-id {
+        text-align: center;
+      }
+    
+      .google-title {
+        font-weight: bold;
+        font-size: 90px;
+      }
+
+      .button {
+        color: #5F6369;
+        background-color: #F3F3F3;
+        width: 150px;
+        height: 30px;
+        border-radius: 5px;
+        border-style: none;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        color: #222222;
+        border: 1px solid #C6C6C6;
+        background-color: #F6F6F6;
+      }
+
+      .button:focus {
+        color: #222222;
+        border: 1px solid #C6C6C6;
+        background-color: #F6F6F6;        
+        outline: none;
+        border:solid 1px blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <div id="googleId">Google</div> -->
+    <div id="googleContainerId">
+      <span id="char1Id" class="google-title">G</span>
+      <span id="char2Id" class="google-title">o</span>
+      <span id="char3Id" class="google-title">o</span>
+      <span id="char4Id" class="google-title">g</span>
+      <span id="char5Id" class="google-title">l</span>
+      <span id="char6Id" class="google-title">e</span>
+    </div>
+    
+    
+
+    <div id="textContainerId"><input type="text" id="textId" /></div>
+
+    <br />
+
+    <div class="button-container-id">
+      <button class="button">Google 検索</button>
+      <button class="button">I'm Feeling Lucky</button>
+    </div>
+
+  </body>
+</html>
