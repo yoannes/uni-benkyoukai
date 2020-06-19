@@ -24,6 +24,7 @@ const app = {
       console.log(x);
     }
   },
+  
   init: function () {
     console.log("Start of the super APP");
 
