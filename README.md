@@ -3,6 +3,7 @@
 Clone the repository
 
 ```bash
+#uni-benkyokaiに移動して
 
 # add files
 git add .
