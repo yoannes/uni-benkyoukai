@@ -55,6 +55,8 @@ const app = {
     // this.loopArray();
     this.playWithHtml();
   },
+
+  
   playWithHtml: function () {
     let el;
 
