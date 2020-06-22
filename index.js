@@ -8,102 +8,67 @@ let arr = [];
 let obj = {};
 let fn = function () {};
 
-// Inject `a` into `obj`
-obj.a = "asdasdas";
-
-const app = {
-  bookShelves: [["00", "01", "02", "03"], ["10", "11", "12", "13"], ["20", "21", "22", "23"], []],
-  loopArray: function () {
-    console.log("Length", this.bookShelves.length);
-    for (let i = 0; i < this.bookShelves.length; i++) {
-      const x = this.bookShelves[i];
-
-      // Change the value of:
-      // this.bookShelves[i][2] = "new";
-
-      console.log(x);
-    }
-  },
+const App = {
   init: function () {
-    console.log("Start of the super APP");
+    console.log("Starting the app");
 
-    // console.log("Bookshelf. Book at 1st floor and 2nd slot");
-    // console.log(this.bookShelves[1][2]);
+    console.log("Create the components");
+    this.components.createElements();
+    console.log("Components created");
 
-    // this.bookShelves[1][2] = "Lord of the rings";
-    // document.getElementById("12").innerHTML = this.bookShelves[1][2];
-    // console.log(this.bookShelves[1][2]);
+    // Set content and styling
+    this.components.googleContainer.style.border = "solid";
+    this.components.googleContainer.style.color = "black";
+    this.components.googleContainer.style.width = "500px";
+    this.components.googleContainer.style.height = "100px";
+    this.components.googleContainer.style.marginLeft = "auto";
+    this.components.googleContainer.style.marginRight = "auto";
 
-    // console.log("Bookshelf. Book at 2st floor and 3nd slot");
-    // console.log(this.bookShelves[2][3]);
+    this.components.g.innerHTML = "G";
+    this.components.g.style.color = "blue";
+    this.components.g.style.fontSize = "120px";
 
-    // this.bookShelves[2][3] = "Great gatsby";
-    // document.getElementById("23").innerHTML = this.bookShelves[2][3];
-    // console.log(this.bookShelves[2][3]);
+    this.components.o1.innerHTML = "o";
+    this.components.o1.style.color = "red";
+    this.components.o1.style.fontSize = "90px";
 
-    // this.bookShelves[3].push("Baseball bat");
-    // this.bookShelves[3].push("Baseball ball");
-    // this.bookShelves[3].push("Hat");
-    // this.bookShelves[3].push("Cup");
-    // console.log(this.bookShelves[3]);
+    this.components.o2.innerHTML = "o";
+    this.components.o2.style.color = "orange";
+    this.components.o2.style.fontSize = "90px";
 
-    // this.bookShelves[3].splice(1, 1);
-    // console.log(this.bookShelves[3]);
-
-    // console.log(this.bookShelves);
-
-    // this.loopArray();
-    this.playWithHtml();
+    console.log("Final", this);
   },
+  components: {
+    createElements: function () {
+      // Create the elements
 
-  
-  playWithHtml: function () {
-    let el;
+      this.app = document.getElementById("app");
 
-    console.log("Lets play with HTML");
+      this.googleContainer = document.createElement("div");
+      this.app.appendChild(this.googleContainer);
 
-    // Find element by ID
-    el = document.getElementById("containerId");
-    console.log("Found element:", el);
+      this.buttonsContainer = document.createElement("div");
+      this.app.appendChild(this.buttonsContainer);
 
-    // Find element by class
-    el = document.getElementsByClassName("column");
-    console.log("Found element:", el);
+      this.g = document.createElement("span");
+      this.googleContainer.appendChild(this.g);
 
-    // Create element
-    el = document.createElement("div");
-    console.log("Found element:", el);
+      this.o1 = document.createElement("span");
+      this.googleContainer.appendChild(this.o1);
 
-    // ---- Manipulate element ------ //
-    el = document.getElementById("containerId");
-
-    // Change the content
-    el.innerHTML = "<i>im a container + new content</i>";
-
-    // Change the style
-    el.style.backgroundColor = "red";
-    console.log("styling", el.style);
-
-
-
-    // change class
-    el.classList.remove("bold");
-    el.classList.add("bold");
-    console.log("classes", el.classList);
-
-    el = document.createElement("div");
-    el.id = "myNewElement";
-    el.style.fontSize = "50px";
-    el.classList.add("bold");
-    el.innerHTML = "im the new component";
-
-    document.body.appendChild(el);
-    console.log("new element", el);
-
-    // Find text
-    el = document.getElementById("text");
-    console.log("text", el);
+      this.o2 = document.createElement("span");
+      this.googleContainer.appendChild(this.o2);
+    },
+    app: null,
+    googleContainer: null,
+    buttonsContainer: null,
+    g: null,
+    o1: null,
+    o2: null,
+    searchInput: null,
+    searchBtn: null,
+    feelingLuckyBtn: null,
   },
 };
 
-app.init();
+App.init();
