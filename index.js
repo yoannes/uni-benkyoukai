@@ -78,11 +78,13 @@ const app = {
     el = document.getElementById("containerId");
 
     // Change the content
-    el.innerHTML = "<i>new content</i>";
+    el.innerHTML = "<i>im a container + new content</i>";
 
     // Change the style
     el.style.backgroundColor = "red";
     console.log("styling", el.style);
+
+
 
     // change class
     el.classList.remove("bold");

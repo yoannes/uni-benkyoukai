@@ -11,91 +11,103 @@
     <div id="app"></div>
     
     <script>
-        // test-area-----------
-
-
-       
-    
-        
-
-
-        
-
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // -----------------------------------------------------------------
-
-        
-        // kadai↓
         const app = document.getElementById("app")
         console.log(app)
 
+
+
         // google-title
+
         const g = document.createElement("span")
         g.innerHTML = "G"
         g.style.color = "blue"
+        g.style.fontSize = "120px"
         app.appendChild(g)
+        
 
         const o = document.createElement("span")
         o.innerHTML = "o"
         o.style.color = "red"
+        o.style.fontSize = "90px"
         app.appendChild(o)
+        
 
         const o2 = document.createElement("span")
         o2.innerHTML = "o"
         o2.style.color = "orange"
+        o2.style.fontSize = "90px"
         app.appendChild(o2)
+        
 
         const g2 = document.createElement("span")
         g2.innerHTML = "g"
         g2.style.color = "blue"
+        g2.style.fontSize = "90px"
         app.appendChild(g2)
+        
 
         const l = document.createElement("span")
         l.innerHTML = "l"
         l.style.color = "green"
+        l.style.fontSize = "90px"
         app.appendChild(l)
+        
 
         const e = document.createElement("span")
         e.innerHTML = "e"
         e.style.color = "red"
+        e.style.fontSize = "90px"
         app.appendChild(e)
+        
+
+        const googleContainer = document.createElement("div")
+        googleContainer.innerHTML = "<div></div>"
+        googleContainer.style.border = "solid"
+        googleContainer.style.color = "black"
+        googleContainer.style.width = "500px"
+        googleContainer.style.height = "100px"
+        googleContainer.style.marginLeft = "auto"
+        googleContainer.style.marginRight = "auto"
+        app.appendChild(googleContainer)
+        
 
 
-        // text-box
-        const TBOX = document.createElement("div")
-        TBOX.innerHTML = input
-        app.appendChild(TBOX)
+        // textBox
+        const tBox = document.createElement("div")
+        tBox.innerHTML = "<input/>"
+        tBox.style.width = "1000px"
+        tBox.style.textAlign = "center"
+        app.appendChild(tBox)
 
-
+        
 
         // buttons
-        const button  = document.createElement("span")
-        button.innerHTML = "Google 検索"
+        const button  = document.createElement("div")
+        button.innerHTML = "<button>Google 検索</button>"
         button.style.color = "black"
+        button.style.textAlign = "center"
+       
         app.appendChild(button)
 
-        const button2  = document.createElement("span")
-        button2.innerHTML = "I'm Feeling Lucky"
+        const button2  = document.createElement("div")
+        button2.innerHTML = "<button>I'm Feeling Lucky</button>"
         button2.style.color = "black"
+        button2.style.textAlign = "center"
+        
         app.appendChild(button2)
 
 
+        const buttonsContainer = document.createElement("div")
+        buttonsContainer.innerHTML = "<div></div>"
+        buttonsContainer.style.border = "solid"
+        buttonsContainer.style.color = "black"
+        buttonsContainer.style.width = "250px"
+        buttonsContainer.style.height = "30px"
+        buttonsContainer.style.marginLeft = "auto"
+        buttonsContainer.style.marginRight = "auto"
+        app.appendChild(buttonsContainer)
 
+        
     </script>
 </body>
 </html>
