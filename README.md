@@ -15,18 +15,3 @@ git commit -m "message"
 git push origin master
 
 ```
-
-
-Pull
-
-```bash
-
-# check status?
-git status
-
-# pull
-git pull origin master
-
-
-
-```
