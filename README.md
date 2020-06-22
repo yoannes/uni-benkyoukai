@@ -13,5 +13,29 @@ git commit -m "message"
 
 # push
 git push origin master
+
+
 ```
+
+
+
+
+
+Pull
+
+~~~bash
+Pull
+
+```bash
+
+# check status?
+git status
+
+# pull
+git pull origin master
+
+```
+
+
+~~~
 
