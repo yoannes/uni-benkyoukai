@@ -1,4 +1,4 @@
-# Unimal Benkyoukai
+# README
 
 Clone the repository
 
@@ -16,8 +16,6 @@ git push origin master
 
 
 ```
-
-
 
 
 

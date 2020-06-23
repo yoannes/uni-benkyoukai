@@ -16,7 +16,6 @@ const App = {
     this.components.createElements();
     console.log("Components created");
 
-
     // Set content and styling
     this.components.googleContainer.style.border = "solid";
     this.components.googleContainer.style.color = "white";
@@ -33,6 +32,14 @@ const App = {
     this.components.searchInput.style.marginRight = "auto";
     this.components.searchInput.style.display = "block";
 
+    this.components.buttonsContainer.style.border = "solid";
+    this.components.buttonsContainer.style.color = "white";
+    this.components.buttonsContainer.style.width = "210px";
+    this.components.buttonsContainer.style.height = "30px";
+    this.components.buttonsContainer.style.marginTop = "20px";
+    this.components.buttonsContainer.style.marginLeft = "auto";
+    this.components.buttonsContainer.style.marginRight = "auto";
+
     this.components.arrowSign.innerHTML = "↓";
     this.components.arrowSign.style.color = "blue";
     this.components.arrowSign.style.fontSize = "100px";
@@ -47,14 +54,6 @@ const App = {
     this.components.inputValueField.style.marginTop = "10px";
     this.components.inputValueField.style.marginLeft = "auto";
     this.components.inputValueField.style.marginRight = "auto";
-
-    this.components.buttonsContainer.style.border = "solid";
-    this.components.buttonsContainer.style.color = "white";
-    this.components.buttonsContainer.style.width = "210px";
-    this.components.buttonsContainer.style.height = "30px";
-    this.components.buttonsContainer.style.marginTop = "20px";
-    this.components.buttonsContainer.style.marginLeft = "auto";
-    this.components.buttonsContainer.style.marginRight = "auto";
 
     this.components.g.innerHTML = "G";
     this.components.g.style.color = "blue";
@@ -117,16 +116,13 @@ const App = {
         App.components.searchBtn.style.background = "transparent"
       }
 
-      App.components.searchBtn.onmousedown = function(evt){
-        // console.log("onmousedown", evt)
 
-        App.components.searchInput.innerHTML = "Searching..."
+      App.components.searchBtn.onmousedown = function(evt){
+        console.log("onmousedown", evt)
+
+        App.components.searchInput.value = "Searching..."
         App.components.inputValueField.innerHTML = "Searching..."
       }
-
-
-      
-
 
       App.components.feelingLuckyBtn.onmouseover = function(evt){
         // console.log("onmouseover", evt)
@@ -189,8 +185,6 @@ const App = {
         App.components.inputValueField.style.color = "green";
       }
 
-      
-
       // document.addEventListener("mousedown", function (evt) {
       //   console.log("clicked2", evt)
       // })
@@ -202,8 +196,6 @@ const App = {
       
       // Create the elements
       this.app = document.getElementById("app");
-
-
 
       this.googleContainer = document.createElement("div");
       this.app.appendChild(this.googleContainer);
@@ -217,13 +209,8 @@ const App = {
       this.arrowSign = document.createElement("div");
       this.app.appendChild(this.arrowSign);
 
-      this.inputValue = document.createElement("span");
-      this.app.appendChild(this.inputValue);
-
       this.inputValueField = document.createElement("div");
       this.app.appendChild(this.inputValueField);
-
-
 
       this.g = document.createElement("span");
       this.googleContainer.appendChild(this.g);
@@ -243,12 +230,14 @@ const App = {
       this.e = document.createElement("span");
       this.googleContainer.appendChild(this.e);
 
-
       this.searchBtn = document.createElement("button");
       this.buttonsContainer.appendChild(this.searchBtn);
 
       this.feelingLuckyBtn = document.createElement("button");
       this.buttonsContainer.appendChild(this.feelingLuckyBtn);
+
+      this.inputValue = document.createElement("span");
+      this.inputValueField.appendChild(this.inputValue);
 
     },
 
@@ -263,8 +252,8 @@ const App = {
     e: null,
     searchInput: null,
     arrowSign: null,
-    inputValue: null,
     inputValueField: null,
+    inputValue: null,
     searchBtn: null,
     feelingLuckyBtn: null,
   },
