@@ -11,6 +11,8 @@ git add .
 # commit
 git commit -m "message"
 
+git commit -m "Add formSaveBtn and deleteBodyAreaBtn"
+
 # push
 git push origin master
 
