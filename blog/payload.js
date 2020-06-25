@@ -1,3 +1,5 @@
+// cons item = data[0]
+
 const data = [
   {
     userId: 1,
