@@ -1,10 +1,13 @@
 const App = {
-  init: function() {
+
+  init: function () {
     console.log("Start of our super blog");
     console.log("Create the components");
     this.components.createComponents();
     console.log("Components created");
+    
 
+    //style-----------------------------------------
     this.components.container.style.display = "flex";
     this.components.container.style.border = "solid";
     this.components.container.style.color = "orange";
@@ -17,13 +20,13 @@ const App = {
     this.components.menuContainer.style.color = "black";
     this.components.menuContainer.style.width = "200px";
     this.components.menuContainer.style.height = "600px";
-   
+
     this.components.bodyContainer.style.border = "solid";
     this.components.bodyContainer.style.color = "blue";
     this.components.bodyContainer.style.width = "800px";
     this.components.bodyContainer.style.height = "600px";
     this.components.bodyContainer.style.position = "relative";
-    
+
     this.components.bodyShowContentArea.style.border = "solid";
     this.components.bodyShowContentArea.style.color = "red";
     this.components.bodyShowContentArea.style.width = "800px";
@@ -61,7 +64,7 @@ const App = {
     this.components.formAddBtnContainer.style.color = "white";
     this.components.formAddBtnContainer.style.width = "100px";
     this.components.formAddBtnContainer.style.height = "30px";
-    
+
     this.components.formTitleInput.style.marginTop = "5px";
     this.components.formTitleInput.style.marginLeft = "auto";
     this.components.formTitleInput.style.marginRight = "auto";
@@ -93,7 +96,7 @@ const App = {
     this.components.saveCancelBtnsContainer.style.color = "transparent";
     this.components.saveCancelBtnsContainer.style.width = "210px";
     this.components.saveCancelBtnsContainer.style.height = "30px";
-    
+
     this.components.formSaveBtn.innerHTML = "SAVE";
     this.components.formSaveBtn.style.marginRight = "5px";
     this.components.formSaveBtn.style.color = "black";
@@ -118,8 +121,10 @@ const App = {
     this.components.formAddBtn.style.height = "30px";
     this.components.formAddBtn.style.cursor = "pointer";
 
+    //-----------------------------------------
 
-    // TODO:
+
+    // TODO:図を書いて理解する
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       this.posts.create(item)
@@ -129,61 +134,62 @@ const App = {
     console.log("Final", this);
   },
 
+
   posts: {
     selectedPost: null,
 
-    create: function(item){
+    create: function (item) {
       // console.log(item)
-      // Check if element exists, if not create it
 
+      // Check if element exists, if not create it
       // もしmenuListsがなかったら、itemを追加していく
-      if (!App.components.menuLists[item.id]){
+      
+
+      //TODO: [item.id]の形が理解できてない
+      if (!App.components.menuLists[item.id]) {
         const el = document.createElement("div");
         el.id = item.id
         el.innerHTML = item.title
-        
+
         el.style.border = "solid";
         el.style.borderColor = "green";
         el.style.width = "200px";
         el.style.height = "50px";
         el.style.overflow = "hidden";
         el.style.cursor = "pointer";
-        
+
         // Create element click listener
-        el.onclick = function(){
+        el.onclick = function () {
 
           // Set clicked element and show in screen
           App.posts.selectedPost = item
           App.posts.showContent()
 
           App.components.deleteBodyAreaBtn.style.display = "block";
-        } 
+        }
 
-        // Add element to posts obj
+        //TODO:
+        // Add el(element) to posts obj
         App.components.menuLists[item.id] = el;
-
-        // Append element to container
-        App.components.menuContainer.appendChild(el);
-
         
 
+        // Append el(element) to container
+        App.components.menuContainer.appendChild(el);
       }
     },
 
-    showContent: function() {
+    showContent: function () {
       console.log(this.selectedPost)
       App.components.bodyShowContentArea.innerHTML = this.selectedPost.body
     }
   },
 
-
-
-
   events: {
-    createEvents: function() {
+    createEvents: function () {
       console.log("Create events")
 
-      App.components.formAddBtn.onclick = function(evt){
+      // TODO:
+      App.components.formAddBtn.onclick = function (evt) {
         App.components.formContainer.style.display = "block";
         App.posts.selectedPost = null;
 
@@ -191,22 +197,23 @@ const App = {
         App.components.formTextArea.value = ""
       }
 
-      App.components.formCloseBtn.onclick = function(evt){
+      App.components.formCloseBtn.onclick = function (evt) {
         App.components.formContainer.style.display = "none";
       }
 
-      App.components.formCancelBtn.onclick = function(evt){
+      App.components.formCancelBtn.onclick = function (evt) {
         App.components.formContainer.style.display = "none";
       }
 
-      App.components.formSaveBtn.onclick = function(evt){
+      // TODO:
+      App.components.formSaveBtn.onclick = function (evt) {
         App.components.formContainer.style.display = "none";
 
-        if(App.posts.selectedPost){
+        if (App.posts.selectedPost) {
           //edit ☆☆☆
           for (let i = 0; i < data.length; i++) {
             const item = data[i];
-            if(item.id === App.posts.selectedPost.id){
+            if (item.id === App.posts.selectedPost.id) {
               item.title = App.components.formTitleInput.value
               item.body = App.components.formTextArea.value
 
@@ -221,7 +228,7 @@ const App = {
         } else {
           //add new
           const item = {
-            id:data.length+1,
+            id: data.length + 1,
             title: App.components.formTitleInput.value,
             body: App.components.formTextArea.value
           }
@@ -229,19 +236,38 @@ const App = {
 
           // push
           data.push(item)
+
           // render
           App.posts.create(item)
-
         }
       }
 
-      App.components.deleteBodyAreaBtn.onclick = function(evt){
-        console.log("onclick deleteBodyAreaBtn")
+      // TODO:
+      App.components.deleteBodyAreaBtn.onclick = function (evt) {
+        //console.log("onclick deleteBodyAreaBtn")
+      
         App.components.bodyShowContentArea.innerHTML = ""
         App.components.deleteBodyAreaBtn.style.display = "none";
+
+        // Remove from data object
+        const idx = data.findIndex(function (item) {
+          return item.id === App.posts.selectedPost.id
+        })
+
+        if (idx > -1) {
+          data.splice(idx, 1)
+        }
+        // -----------
+
+        //　remove the element
+        App.components.menuLists[App.posts.selectedPost.id].remove()
+
+        // Delete from object
+        delete App.components.menuLists[App.posts.selectedPost.id]
+
+        // Clear the selected post
+        App.posts.selectedPost = null
       }
-
-
 
 
     }
@@ -249,7 +275,7 @@ const App = {
 
   components: {
 
-    createComponents: function() {
+    createComponents: function () {
 
       // Create the elements
       this.app = document.getElementById("app");
@@ -274,8 +300,6 @@ const App = {
 
       this.formAddBtnContainer = document.createElement("div");
       this.app.appendChild(this.formAddBtnContainer);
-
-      
 
       this.formTitleInput = document.createElement("input");
       this.formContainer.appendChild(this.formTitleInput);
@@ -318,10 +342,14 @@ const App = {
     formCancelBtn: null,
 
     formAddBtn: null,
-      
-    menuLists: {    
+
+    //TODO: なぜnullじゃダメなのか? そもそも上記でnullで宣言していく理由は?
+    menuLists: {
     },
-  },  
+  },
+
+
+
 
 };
 
