@@ -5,7 +5,7 @@ const App = {
     console.log("Create the components");
     this.components.createComponents();
     console.log("Components created");
-    
+
 
     //style-----------------------------------------
     this.components.container.style.display = "flex";
@@ -124,17 +124,21 @@ const App = {
     //-----------------------------------------
 
 
-    // TODO:図を書いて理解する
+    // TODO:図を書いて理解する. v-for
     for (let i = 0; i < data.length; i++) {
-      const item = data[i];
-      this.posts.create(item)
+      const item = data[i]; //①定数itemにdata[i]を代入
+      this.posts.create(item) //②create(data[i])を実行
     }
 
+/*     for (const item in data) {
+      
+    }
+ */
     this.events.createEvents();
     console.log("Final", this);
   },
 
-
+  // controller
   posts: {
     selectedPost: null,
 
@@ -143,7 +147,6 @@ const App = {
 
       // Check if element exists, if not create it
       // もしmenuListsがなかったら、itemを追加していく
-      
 
       //TODO: [item.id]の形が理解できてない
       if (!App.components.menuLists[item.id]) {
@@ -151,14 +154,16 @@ const App = {
         el.id = item.id
         el.innerHTML = item.title
 
-        el.style.border = "solid";
-        el.style.borderColor = "green";
-        el.style.width = "200px";
-        el.style.height = "50px";
-        el.style.overflow = "hidden";
-        el.style.cursor = "pointer";
+        // el.style.border = "solid";
+        // el.style.borderColor = "green";
+        // el.style.width = "200px";
+        // el.style.height = "50px";
+        // el.style.overflow = "hidden";
+        // el.style.cursor = "pointer";
 
         // Create element click listener
+        // el.onclick = App.methods.clickHandler;
+
         el.onclick = function () {
 
           // Set clicked element and show in screen
@@ -171,9 +176,10 @@ const App = {
         //TODO:
         // Add el(element) to posts obj
         App.components.menuLists[item.id] = el;
-        
+
 
         // Append el(element) to container
+        // v-for
         App.components.menuContainer.appendChild(el);
       }
     },
@@ -191,6 +197,8 @@ const App = {
       // TODO:
       App.components.formAddBtn.onclick = function (evt) {
         App.components.formContainer.style.display = "block";
+
+
         App.posts.selectedPost = null;
 
         App.components.formTitleInput.value = ""
@@ -210,19 +218,16 @@ const App = {
         App.components.formContainer.style.display = "none";
 
         if (App.posts.selectedPost) {
-          //edit ☆☆☆
-          for (let i = 0; i < data.length; i++) {
-            const item = data[i];
-            if (item.id === App.posts.selectedPost.id) {
-              item.title = App.components.formTitleInput.value
-              item.body = App.components.formTextArea.value
+          //edit ←今はつかってない
+          const item = App.util.findPostById(App.posts.selectedPost.id)
+          console.log("found:", item)
+          if (item) {
+            item.title = App.components.formTitleInput.value
+            item.body = App.components.formTextArea.value
 
-              // kind of push/render　(リレンダ)
-              App.components.menuLists[item.id].innerHTML = item.title
-              App.components.bodyContainer.innerHTML = item.body
-
-              break;
-            }
+            // kind of push/render　(リレンダ)
+            App.components.menuLists[item.id].innerHTML = item.title
+            App.components.bodyContainer.innerHTML = item.body
           }
 
         } else {
@@ -234,7 +239,7 @@ const App = {
           }
           console.log(item)
 
-          // push
+          // push ←?
           data.push(item)
 
           // render
@@ -242,14 +247,15 @@ const App = {
         }
       }
 
+
       // TODO:
       App.components.deleteBodyAreaBtn.onclick = function (evt) {
         //console.log("onclick deleteBodyAreaBtn")
-      
+
         App.components.bodyShowContentArea.innerHTML = ""
         App.components.deleteBodyAreaBtn.style.display = "none";
 
-        // Remove from data object
+        // Remove from data object ←?
         const idx = data.findIndex(function (item) {
           return item.id === App.posts.selectedPost.id
         })
@@ -257,21 +263,31 @@ const App = {
         if (idx > -1) {
           data.splice(idx, 1)
         }
+
+        
         // -----------
 
-        //　remove the element
+        // remove the element
         App.components.menuLists[App.posts.selectedPost.id].remove()
+        console.log(App.components.menuLists[App.posts.selectedPost.id])
 
         // Delete from object
         delete App.components.menuLists[App.posts.selectedPost.id]
+        console.log(App.components.menuLists[App.posts.selectedPost.id])
 
         // Clear the selected post
         App.posts.selectedPost = null
       }
-
-
     }
   },
+
+  methods: {
+    clickHandler: function () {
+      App.clicked += 1;
+    }
+  },
+
+
 
   components: {
 
@@ -346,11 +362,124 @@ const App = {
     //TODO: なぜnullじゃダメなのか? そもそも上記でnullで宣言していく理由は?
     menuLists: {
     },
+
   },
 
+  util: {
+    findPostById: function (id) {
+      for (let i = 0; i < data.length; i++) {
+        const item = data[i];
+        if (item.id === id) {
+          return item;
+        }
+      }
 
+      return null;
+    },
 
+    findPostIndex: function (id) {
+      for (let i = 0; i < data.length; i++) {
+        const item = data[i];
+        if (item.id === id) {
+          return i;
+        }
+      }
+
+      const x = 0;
+      const y = null;
+      if (!x) {
+        // true
+      }
+
+      if (!y) {
+        // true
+      }
+
+      const arr = [0, 1, 2, 3]
+
+      console.log(arr[0]) // 0
+      console.log(arr[-1]) // undefined
+      console.log(arr[null]) // raise
+
+      return -1;
+    }
+    // editPostById(id, title, body)
+  }
 
 };
 
+
 App.init();
+
+
+
+
+// Geocoding JSON Responses
+const x = {
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "1600",
+          "short_name": "1600",
+          "types": ["street_number"]
+        },
+        {
+          "long_name": "Amphitheatre Pkwy",
+          "short_name": "Amphitheatre Pkwy",
+          "types": ["route"]
+        },
+        {
+          "long_name": "Mountain View",
+          "short_name": "Mountain View",
+          "types": ["locality", "political"]
+        },
+        {
+          "long_name": "Santa Clara County",
+          "short_name": "Santa Clara County",
+          "types": ["administrative_area_level_2", "political"]
+        },
+        {
+          "long_name": "California",
+          "short_name": "CA",
+          "types": ["administrative_area_level_1", "political"]
+        },
+        {
+          "long_name": "United States",
+          "short_name": "US",
+          "types": ["country", "political"]
+        },
+        {
+          "long_name": "94043",
+          "short_name": "94043",
+          "types": ["postal_code"]
+        }
+      ],
+      "formatted_address": "1600 Amphitheatre Parkway, Mountain View, CA 94043, USA",
+      "geometry": {
+        "location": {
+          "lat": 37.4224764,
+          "lng": -122.0842499
+        },
+        "location_type": "ROOFTOP",
+        "viewport": {
+          "northeast": {
+            "lat": 37.4238253802915,
+            "lng": -122.0829009197085
+          },
+          "southwest": {
+            "lat": 37.4211274197085,
+            "lng": -122.0855988802915
+          }
+        }
+      },
+      "place_id": "ChIJ2eUgeAK6j4ARbn5u_wAGqWA",
+      "plus_code": {
+        "compound_code": "CWC8+W5 Mountain View, California, United States",
+        "global_code": "849VCWC8+W5"
+      },
+      "types": ["street_address"]
+    }
+  ],
+  "status": "OK"
+}

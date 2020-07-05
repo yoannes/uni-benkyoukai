@@ -5,15 +5,20 @@ Clone the repository
 ```bash
 #uni-benkyokaiに移動して
 
-# add files
+# add files----------------------------
 git add .
 
-# commit
+
+# commit-------------------------------
 git commit -m "message"
 
+# commit message sample
 git commit -m "Add formSaveBtn and deleteBodyAreaBtn"
 
-# push
+
+
+
+# push---------------------------------
 git push origin master
 
 
