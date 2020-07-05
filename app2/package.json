@@ -1,0 +1,17 @@
+{
+  "name": "app2",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "export": "nuxt export",
+    "serve": "nuxt serve"
+  },
+  "dependencies": {
+    "dayjs": "^1.8.29",
+    "nuxt": "^2.13.0"
+  },
+  "devDependencies": {}
+}
