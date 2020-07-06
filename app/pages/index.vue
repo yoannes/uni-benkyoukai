@@ -94,7 +94,7 @@ export default {
       if (this.selectedPost) {
         return this.selectedPost.body;
       }
-      // ポイント! nullが入ったらクラッシュする。 selectedpostはnullが入る
+      // ポイント! nullが入ったらクラッシュする。selectedpostはnullが入る
       return "";
     }
   }
