@@ -1,36 +1,35 @@
 <template>
    <div class="root">
      <div @click="clickHandler('one way')">{{ title }}</div>
-      <div @click="clicked += 1">{{ title }}</div>
-      {{ clicked }}
-      <div>selectedPost: {{selectedPost}}</div>
-    <div class="container">
+     <div @click="clicked += 1">{{ title }}</div>
+     {{ clicked }}
+     <div>selectedPost: {{selectedPost}}</div>
+     <div>study:{{ a }}</div>
+     <div class="container">
       <div class="container-menu">
         <div
           v-for="item in data"
           :key="item.id"
-          @click="selectedPost = item"
+          @click="selectedPost = data"
           class="container-menu-item"
-        >{{ item.title }}</div>
+          >{{ item.title }}</div>
       </div>
       <div class="container-body">
-        <div class="body-show-content-area">{{showBody}}</div>
-        <button class="delete-body-area-btn" v-if="selectedPost">x</button>
+        <div class="body-show-content-area"></div>
+        <button class="delete-body-area-btn">x</button>
       </div>
     </div>
-    <div class="form-container" v-if="showModal">
-      <input class="form-title-input" v-model="content.title" />
-      <textarea class="form-text-area" placeholder="Text area body" v-model="content.body" />
-      <button class="form-close-btn" @click="showModal = false">x</button>
-      title: {{content.title}};
-      body: {{content.body}}
+    <div class="form-container">
+      <input class="form-title-input"/>
+      <textarea class="form-text-area" placeholder="Text area body"/>
+      <button class="form-close-btn">x</button>
       <div class="save-cancel-btns-container">
-        <button class="form-save-btn" @click="addHandler">SAVE</button>
+        <button class="form-save-btn">SAVE</button>
         <button class="form-cancel-btn">CANCEL</button>
       </div>
     </div>
     <div class="form-add-btn-container">
-      <button class="form-add-btn" @click="addBtnHandler">Add</button>
+      <button class="form-add-btn">Add</button>
     </div>
   </div>
 </template>
@@ -42,14 +41,14 @@ export default {
       clicked: 0,
       data: [
         {
-          id: 1,
+          idd: 1,
           title:
             "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
           body:
             "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
         },
         {
-          id: 2,
+          idd: 2,
           title: "qui est esse",
           body:
             "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
@@ -63,38 +62,6 @@ export default {
         body: null
       }
     };
-  },
-  methods: {
-    clickHandler(item) {
-      console.log(item);
-    },
-    addBtnHandler() {
-      this.selectedPost = null;
-      this.showModal = true;
-    },
-    addHandler() {
-      // console.log("add", this.content.title, this.content.body);
-      // ポイント!
-      const newItem = { 
-        id: this.data.length + 1,
-        title: this.content.title,
-        body: this.content.body
-      };
-      // ポイント!
-      this.data.push(newItem);
-      this.showModal = false;
-      // ポイント!
-      this.selectedPost = newItem
-    }
-  },
-  computed: {
-    showBody() {
-      if (this.selectedPost) {
-        return this.selectedPost.body;
-      }
-      // ポイント! selectedpostはnullが入るとダメ。nullが入ったらクラッシュする。なので return ""。 
-      return "";
-    }
   }
 };
 </script>

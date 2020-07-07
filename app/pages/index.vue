@@ -1,9 +1,32 @@
 <template>
-  <div class="root">
+  <div class="about-class">
+    <div>
+      <input type="checkbox" v-model="toggle">
+      <label v-if="toggle">Show/Hide</label>
+    </div>
     <div @click="clickHandler('one way')">{{ title }}</div>
+    <div @click="clickHandler('1 way')">{{ title }}</div>
+    <!-- App.data.title -->
     <div @click="clicked += 1">{{ title }}</div>
     {{ clicked }}
+    <div @click="clickHandler2">{{ title }}</div>
+    {{ clicked2 }}
     <div>selectedPost: {{selectedPost}}</div>
+    <div>study:{{ data[0].title }}</div>
+    <div
+      v-for="n in [1,2,3,4,5,6,7,8,9,0]"
+      :key="n"                
+      style="margin: 10px"
+    >
+      <div style="border: 1px solid black">now at: {{ n }}</div>
+    </div>    
+    <div
+      v-for="(b, i) in books"
+      :key="i"
+      style="margin: 10px"
+    >
+      <div style="border: 1px solid blue">index: {{i}} id: {{b.id}} {{b.title}} {{b.price}}yen</div>
+    </div>
     <div class="container">
       <div class="container-menu">
         <!-- loop all datas and will append to menu -->
@@ -13,7 +36,9 @@
           :key="item.id"
           @click="selectedPost = item"
           class="container-menu-item"
-        >{{ item.title }}</div>
+        >
+          <div>{{ item.title }}</div> 
+        </div>
       </div>
       <div class="container-body">
         <div class="body-show-content-area">{{showBody}}</div>
@@ -38,10 +63,13 @@
 </template>
 <script>
 export default {
+  // State
   data() {
     return {
       title: "Super title",
       clicked: 0,
+      clicked2: 0,
+      toggle: true,
       data: [
         {
           id: 1,
@@ -57,6 +85,18 @@ export default {
             "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
         }
       ],
+      books: [
+        {
+          id: 1,
+          title: "The Lord of the Rings",
+          price: 1000
+        },
+        {
+          id: 2,
+          title: "Harry Potter",
+          price: 800
+        }
+      ],
       selectedPost: null,
       showModal: false,
       showDelete: false,
@@ -69,6 +109,9 @@ export default {
   methods: {
     clickHandler(item) {
       console.log(item);
+    },
+    clickHandler2(item) {
+      this.clicked2 += 1;
     },
     addBtnHandler() {
       this.selectedPost = null;
@@ -153,7 +196,7 @@ export default {
 }
 .form-container {
   position: absolute;
-  top: 0;
+  top: 1000px;
   left: 0;
   right: 0;
   bottom: 0;
