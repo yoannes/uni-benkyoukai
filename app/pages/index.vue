@@ -1,7 +1,17 @@
 <template>
+<!-- 
+  1. Make edit button, open the modal, edit and save
+  2. Delete post
+ -->
+
+
   <div class="about-class">
+    <div class="menu">
+      <span>Menu</span> <nuxt-link to="/about">About</nuxt-link>
+    </div>
+
     <div>
-      <input type="checkbox" v-model="toggle">
+      <input v-model="toggle" type="checkbox" />
       <label v-if="toggle">Show/Hide</label>
     </div>
     <div @click="clickHandler('one way')">{{ title }}</div>
@@ -13,13 +23,15 @@
     {{ clicked2 }}
     <div>selectedPost: {{selectedPost}}</div>
     <div>study:{{ data[0].title }}</div>
-    <div
+
+    <!-- <div
       v-for="n in [1,2,3,4,5,6,7,8,9,0]"
       :key="n"                
       style="margin: 10px"
     >
       <div style="border: 1px solid black">now at: {{ n }}</div>
-    </div>    
+    </div>   -->
+
     <div
       v-for="(b, i) in books"
       :key="i"
@@ -27,6 +39,7 @@
     >
       <div style="border: 1px solid blue">index: {{i}} id: {{b.id}} {{b.title}} {{b.price}}yen</div>
     </div>
+    
     <div class="container">
       <div class="container-menu">
         <!-- loop all datas and will append to menu -->
@@ -34,20 +47,20 @@
         <div
           v-for="item in data"
           :key="item.id"
-          @click="selectedPost = item"
           class="container-menu-item"
+          @click="selectedPost = item"
         >
           <div>{{ item.title }}</div> 
         </div>
       </div>
       <div class="container-body">
-        <div class="body-show-content-area">{{showBody}}</div>
-        <button class="delete-body-area-btn" v-if="selectedPost">x</button>
+        <div id="bodyShowContentArea" class="body-show-content-area">{{showBody}}</div>
+        <button v-if="selectedPost" class="delete-body-area-btn" @click="deleteHandler">x</button>
       </div>
     </div>
-    <div class="form-container" v-if="showModal">
-      <input class="form-title-input" v-model="content.title" />
-      <textarea class="form-text-area" placeholder="Text area body" v-model="content.body" />
+    <div v-if="showModal" class="form-container" >
+      <input v-model="content.title" class="form-title-input"  />
+      <textarea v-model="content.body" class="form-text-area" placeholder="Text area body"  />
       <button class="form-close-btn" @click="showModal = false">x</button>
       title: {{content.title}};
       body: {{content.body}}
@@ -56,8 +69,9 @@
         <button class="form-cancel-btn">CANCEL</button>
       </div>
     </div>
-    <div class="form-add-btn-container">
-      <button class="form-add-btn" @click="addBtnHandler">Add</button>
+    <div class="btns-container">
+      <button class="btns-container-btn" @click="addBtnHandler">Add</button>
+      <button class="btns-container-btn" @click="editBtnHandler">Edit</button>
     </div>
   </div>
 </template>
@@ -116,23 +130,97 @@ export default {
     addBtnHandler() {
       this.selectedPost = null;
       this.showModal = true;
+      this.content.title = "";
+      this.content.body = "";
     },
     addHandler() {
       console.log("add", this.content.title, this.content.body);
-      // ポイント!
-      const newItem = { 
-        id: this.data.length + 1,
-        title: this.content.title,
-        body: this.content.body
-      };
-      // ポイント!
-      this.data.push(newItem);
-      this.showModal = false;
-      // ポイント!
-      this.selectedPost = newItem
+      if (this.selectedPost) {
+        const item = this.findPostById(this.selectedPost.id)
+        console.log("found:", item)
+        if (item) {
+          item.title = this.content.title
+          item.body = this.content.body
+
+          // kind of push/render, re-render
+          this.data[item.id].innerHTML = item.title
+          // this.bodyShowContentArea.innerHTML = item.body
+        }
+      } else {
+        // add new
+        // ポイント!
+        const newItem = { 
+          id: this.data.length + 1,
+          title: this.content.title,
+          body: this.content.body
+        };
+        // ポイント!
+        this.data.push(newItem);
+        this.showModal = false;
+        // ポイント!
+        this.selectedPost = newItem
+      }
+    },
+    editBtnHandler() {
+      this.content.title = "";
+      this.content.body = "";
+      console.log("selectedPostId", this.selectedPost.id);
+      console.log("edit", this.content.title, this.content.body);
+      this.showModal = true;
+      if (this.selectedPost) {
+        const item = this.findPostById(this.selectedPost.id)
+        console.log("found:", item)
+      }
+    },
+    deleteHandler() {
+      console.log("delete-body-area-btn")
+      this.content.body = "";
+      // Remove from data object ←?
+      const idx = this.findPostIndex(function (item) {
+        return item.id === this.selectedPost.id
+      })
+      if (idx > -1) {
+        this.data.splice(idx, 1)
+      }
+      // remove the element 
+      // this.data[this.selectedPost.id].remove()
+      // this.data.$remove(this.selectedPost.id)
+      // console.log("remove:", this.data[this.selectedPost.id])
+      // Delete from object
+      // delete this.data[this.selectedPost.id]
+      this.$delete(this.data, this.selectedPost.id)
+      console.log("delete:", this.data[this.selectedPost.id])
+      // Clear the selected post
+      this.selectedPost = null;
+      this.selectedPost = false;
+    },
+    findPostById(id) {
+      for (let i = 0; i < this.data.length; i++) {
+        const item = this.data[i];
+        if (item.id === id) {
+          return item;
+        }
+      }
+      return null;
+    },
+    findPostIndex(id) {
+      for (let i = 0; i < this.data.length; i++) {
+        const item = this.data[i];
+        if (item.id === id) {
+          return i;
+        }
+      }
+      return -1;
     }
   },
   computed: {
+    showTitle() {
+      if (this.selectedPost) {
+        return this.selectedPost.title;
+      }
+      // ポイント! nullが入ったらクラッシュする。selectedpostはnullが入る
+      return "";
+    },
     showBody() {
       if (this.selectedPost) {
         return this.selectedPost.body;
@@ -143,7 +231,10 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+.menu {
+  display: flex;
+}
 .container {
   display: flex;
   border: solid;
@@ -196,7 +287,7 @@ export default {
 }
 .form-container {
   position: absolute;
-  top: 1000px;
+  top: 500px; /* check */
   left: 0;
   right: 0;
   bottom: 0;
@@ -260,19 +351,21 @@ export default {
   height: 20px;
   cursor: pointer;
 }
-.form-add-btn-container {
+.btns-container {
   margin-top: 5px;
   border: solid;
   color: white;
-  width: 100px;
-  height: 30px;
+  width: 230px;
+  height: 50px;
+  text-align:center;
 }
-.form-add-btn {
+.btns-container-btn {
   margin-top: 5px;
   color: black;
   font-size: 20px;
   width: 100px;
   height: 30px;
+  display: inline-block;
   cursor: pointer;
 }
 </style>

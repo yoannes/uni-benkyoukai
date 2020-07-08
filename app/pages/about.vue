@@ -1,7 +1,8 @@
-<!---
 <template>
   <div>
-    <div class="about-class">aaa</div>
+    <div>About page</div>
+    
+    <nuxt-link to="/">back</nuxt-link>
   </div>
 </template>
 
@@ -11,7 +12,5 @@ export default {
 }
 </script>
 <style scoped>
-  .about-class {
-    width: 100px;
-  }
-</style> -->
+
+</style> 

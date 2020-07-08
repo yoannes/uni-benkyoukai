@@ -1,0 +1,500 @@
+docker run -it -d --name ubuntu ubuntu:18.04
+docker ps
+docker ps -a
+docker exec -it ubuntu /bin/bash
+git clone https://github.com/ikasam/docker-yaml_cv.git
+cd docker-yaml_cv
+git clone https://github.com/kaityo256/yaml_cv.git
+docker-compose up
+ruby make_cv -i data.yaml -s style.txt -o output.pdf
+ruby make_cv -h
+Usage: make_cv [options]
+    -i, --input [datafile]
+    -s, --style [stylefile]
+    -o, --output [output]
+ruby make_cv -h
+pwd
+cd Desktop
+pwd
+gcc hello.c
+./a.out
+gcc hello.c
+./a.out
+gcc hello.c
+./a.out
+./a.out
+gcc hello.c
+./a.out
+docker start ubuntu
+docker 
+docker exec -it ubuntu /bin/bash
+docker stop ubuntu
+docker build -t compilerbook https://www.sigbus.info/compilerbook/Dockerfile
+docker run --rm compilerbook ls /
+make
+docker run --rm -v $/Users/yh103059/Desktop/motocc:/motocc -w /motocc compilerbook cc -o motocc motocc.c
+cc -o motocc motocc.c
+cd /Users/yh103059/Desktop/motocc
+cc -o motocc motocc.c
+./motocc 123 > tmp.s
+cat tmp.s
+cc -o motocc motocc.c
+./motocc 123 > tmp.s
+cat tmp.s
+cc -o tmp tmp.s
+motocc -o tmp tmp.s
+pwd
+chmod a+x test.sh
+./test.sh
+chmod a+x test.sh
+./test.sh
+chmod a+x test.sh
+./test.sh
+chmod a+x test.sh
+./test.sh
+./test.sh
+chmod a+x test.sh
+./test.sh
+bash -x test.sh
+./test.sh
+cc -o motocc motocc.c
+./motocc 123 > tmp.s
+cat tmp.s
+./test.sh
+chmod a+x test.sh
+./test.sh
+git config --global user.name "hyumanase"
+git config --global user.email "hyumayamaguchi@gmail.com"
+git init
+git add 9cc.c test.sh Makefile .gitignore
+git add motocc.c test.sh Makefile .gitignore
+git commit -m "整数1つをコンパイルするコンパイラを作成"
+git log -p
+git remote add origin git@github.com:hyumanase/motocc.git
+git push
+git push
+git config --global push.default matching
+git config --global push.default simple
+git remote add origin git@github.com:hyumanase/motocc.git
+git push
+git push --set-upstream origin master
+git config --global user.email hyumayamaguchi@gmail.com
+git remote add origin https://github.com/hyumanase/motocc.git
+git push origin master
+exit
+cal
+cal 4 1991
+4 1
+4 1000
+cal 4 1
+cal 4 1891
+4 2091
+cal 4 2091
+chsh -s /bin/zsh
+objdump -d -M intel /bin/ls
+cd /Users/yh103059/Desktop/motocc 
+docker run --rm compilerbook cc -o test1 test1.c
+cal -j 6 2020
+uname
+uname -pr
+ruby -v
+bash -v
+yum update bash
+brew install bash
+bash -v
+sudo vi /etc/shells
+chsh -s /usr/local/bin/bash
+chsh -s /usr/local/bin/bash
+echo $BASH_VERSION
+sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'
+chsh -s /usr/local/bin/bash
+echo $BASH_VERSION
+echo $BASH_VERSION
+ls
+ls Documents/
+ls Documents Pictures
+ls Documents Pictures/
+ls /Applications/
+history 
+history 
+ls Documents/
+docker run --rm compilerbook 
+cat > name.txt
+cat name.txt 
+cat < name.txt
+cat < name.txt > name2.txt
+ls
+date >> name.txt
+cat < name.txt
+cat < name.txt
+cat < name2.txt
+ls -l /usr/bin/
+ls -l /usr/bin/ | less
+man cp
+man cp
+sw_vers
+git clone https://github.com/tatsumack/30nichideosjisaku
+brew install qemu
+qemu-system-i386 -version
+30nichideosjisaku/01_day/helloos0
+cd 30nichideosjisaku/01_day/helloos0
+make run
+brew install f3
+macでのSDカード検証
+microSDカードが本物かmacOSで検証する
+f3write --version
+f3read --version
+ls /Volumes
+f3write /Volumes/samsung128g/
+f3readf3read /Volumes/samsung128g/
+f3read /Volumes/samsung128g/
+brew -v
+brew install nodebrew
+nodebrew -v
+echo $SHELL
+echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> ~/.bash_profile
+source ~/.bash_profile
+nodebrew setup
+nodebrew install-binary stable
+nodebrew use stable
+node -v
+node -v
+cd es6_sample
+pwd
+npm init -y
+npm install --save @babel/core @babel/cli @babel/preset-env
+node src/first.js
+./node_modules/.bin/babel src --out-dir dist
+node dist/first.js
+npm run build
+node dist/first.js
+cd /Users/yh103059/Desktop/prog 
+npm run build
+pwd
+cd /Users/yh103059/Desktop/prog/run/
+pwd
+pwd
+npm run build
+npm run build
+node dist/test.js
+pdw
+ped
+pwd
+cd /Users/yh103059/Desktop/prog
+npm run build
+./node_modules/.bin/babel src --out-dir dist
+cd/Users/yh103059/es6_sample 
+cd /Users/yh103059/es6_sample 
+npm run build
+node dist/test.js
+npm run build
+cd /Users/yh103059/es6_sample 
+cd // Homework for next class:
+// Populate every row of the table with a book like wee did today with the book "Lord of the ring" and "Great gatsby"
+const app = {
+  bookShelves: [["00", "01", "02", "03"], ["10", "11", "12", "13"], ["20", "21", "22", "23"], []],
+  
+  loopArray: function () {
+    console.log("Length", this.bookShelves.length);
+    for (let i = 0; i < this.bookShelves.length; i++) {
+      const x = this.bookShelves[i];
+      // Change the value of:
+      // this.bookShelves[i][2] = "new";
+      console.log(x);
+    }
+  },
+  init: function () {
+    console.log("Start of the super APP");
+    console.log("Bookshelf. Book at 0 floor and 0 slot");
+    console.log(this.bookShelves[0][0]);
+    this.bookShelves[0][0] = "Anpanman";
+    document.getElementById("00").innerHTML = this.bookShelves[0][0];
+    console.log(this.bookShelves[0][0]);
+    console.log("Bookshelf. Book at 0 floor and 1st slot");
+    console.log(this.bookShelves[0][1]);
+    this.bookShelves[0][1] = "Doraemon";
+    document.getElementById("01").innerHTML = this.bookShelves[0][1];
+    console.log(this.bookShelves[0][1]);
+    console.log("Bookshelf. Book at 0 floor and 2nd slot");
+    con    con    con    con    con    con    con    con    con    con    con    con    con    con    coentBy    con    con    con    .b    con    con    con    con    con    con    con [0    con    con    con    con    con    con    con    cnd    con    con    con    con    conook    con    con    con    conok    con    con    con    con    con    men    con    con    co")    er   L =    con    con    co[3    con    con    con    con    con    co);
+    con    con    con    con    con    con    con    conot");
+    console.log(this.bookShelves[1][0]    console.log(this.bookShelves[1][0] of    console.log(this.bookShelves[1][0]    console.log(this.bookShelvSh    console.log(this.bookShelves[1][0] helves[1][0]);
+ls
+git init
+git remote add https://github.com/yoannes/uni-benkyoukai.git
+git remote add origin https://github.com/yoannes/uni-benkyoukai.git
+git add .
+git commit -m "test"
+git push origin master
+git pull origin master
+git push origin master
+git pull origin master
+git pull origin master
+git status
+git add .
+git commit -m "test"
+git push origin master
+git pull origin master
+git add .
+git add .
+git commit -m "test my 1st commit"
+git push origin master
+git add .
+git commit -m "message"
+git commit -m "Add google-title and buttons"
+git add .
+git commit -m "Add google-title and buttons"
+git push origin master
+git add .
+git commit -m "Add google-title and buttons"
+git commit -m "Add google-title and buttons"
+git add .
+git commit -m "Add google-title and buttons"
+git push origin master
+git status
+git pull origin master
+git add .
+git commit -m "Add tBox and buttons"
+git push origin master
+cd /Users/yh103059/Desktop/uni-benkyokai 
+cd /Users/yh103059/Desktop/uni-benkyokai
+git add .
+git commit -m "Add onmouseover/onmouseout events for feelingLuckyBtn"
+git push origin master
+git add .
+git commit -m "Add onmouseover/onmouseout events for feelingLuckyBtn"
+git commit -m "Add onmouseover/onmouseout events for feelingLuckyBtn"
+git push origin master
+cd /Users/yh103059/Desktop/uni-benkyokai
+git add .
+git commit -m "Add onmouseover/onmouseout events for feelingLuckyBtn"
+git push origin master
+git add .
+git commit -m "Add onmouseover/onmouseout events for feelingLuckyBtn"
+git push origin master
+git push origin master
+git rebase --abort
+git status
+cd /Users/yh103059/Desktop/uni-benkyokai
+git add .
+git commit -m "Add onmouseover/onmouseout events for feelingLuckyBtn"
+git push origin master
+git status
+git stash
+git pull origin master
+gs
+git status
+git stash pop
+code README.md 
+git status
+git pull origin master
+git add .
+git commit -m "Add formContainer and formContainerAddBtn"
+git push origin master
+git add .
+git commit -m "Add overflow scrolling in menuContainer"
+git push origin master
+git status
+git add .
+git commit -m "conflicts"
+git stash pop
+cd /Users/yh103059/Desktop/uni-benkyokai
+git add .
+git commit -m "Add Add formContainer and formContainerAddBtn"
+git push origin master
+defaults write com.apple.screencapture name "screenshot"
+node
+ls
+cd Desktop/
+cd uni-benkyokai/
+ls
+mkdir node
+cd node
+ls
+node index.js 
+node index.js 
+node index.js 
+node index.js 
+npm init
+npm i dayjs
+npm i dayjs
+node index.js 
+node index.js 
+open .
+ls
+node index.js 
+cd ..
+mkdir app
+cd app
+npx create-nuxt-app .
+ls
+npm run c
+npm run dev
+nuxt
+ls
+node_modules/nuxt/bin/nuxt.js 
+npm run dev
+npm i dayjs
+npm run dev
+npm i
+npm run dev
+ npm run dev
+npm run dev
+npm i
+npm run dev
+history -w history.txt
+node
+node
+cd Desktop
+cd Desktop/
+cd Desktop/
+pwd
+pwd
+cd Desktop
+cd ..
+pwd
+ls
+cd kadai0702/
+mkdir node
+ls
+node index.js
+npm init
+npm init
+npm i dayjs
+node index.js 
+open .
+open .
+node index.js
+cd ..
+cd kadai0702/
+cd .
+cd ..
+cd kadai0702/
+mkdir app
+cd app
+npx create-nuxt-app .
+npx create-nuxt-app .
+ls
+ls
+npm run c
+npm run dev
+nuxt
+ls
+node_modules/nuxt/bin/nuxt.js 
+npm run dev
+npm i dayjs
+npm i
+npm o
+npm xmas
+node
+ls 
+cd kadai/
+cd kadai0
+node
+mkdir node
+cd node
+ls
+ls
+node
+node index.js 
+cd ..
+cd node/
+npm init
+npm i dayjs
+node index.js 
+npm i
+cd kadai0
+npm init
+cd node
+npm init
+npm i dayjs
+node index.js 
+node index.js
+node index.js
+node index.js
+node index.js
+cd ..
+mkdir app
+cd app
+npx create-nuxt-app .
+open .
+open .
+cd node_modules/
+npm i dayjs
+open ..
+open .
+npm i
+cd..
+cd ..
+cd kadai0
+cd app
+npm i
+open.
+open .
+cd /Users/yh103059/Desktop/uni-benkyokai
+git add .
+git commit -m "Add init:function, posts, events and components"
+git push origin master
+npm run dev
+npm run dev
+npm run dev
+npm run dev
+npm run dev
+npm run dev
+npm run dev
+eslint -v
+history -r history.txt
+history -w history.txt
+npm xmas
+npm run dev
+npm run dev
+npm run dev
+npm run dev
+cd /Users/yh103059/Desktop/uni-benkyokai/
+git add .
+git commit -m "Add app folder to study vue.js"
+git push origin master
+eslint -v
+npm eslint -v
+cd ..
+git add .
+git commit -m "some change App2 folder to study"
+git push origin master
+cd ..
+git add .
+git commit -m "Add app2 folder to study vue.js"
+git push origin master
+node
+pwd
+cd /Users/yh103059/Desktop
+ls
+cd uni-benkyokai/
+ls
+cd app2
+npx create-nuxt-app .
+cd node_modules/
+npm i dayjs
+history -w history.txt
+cd ..
+eslint -v
+npm eslint -v
+npm dev
+npm run dev
+cd ..
+cd app
+npm run dev
+cd ..
+cd app2
+npm run dev
+cd ..
+cd app
+npm run dev
+ls
+npm run serve
+npm run mdev
+npm run dev
+npm i sass-loader
+npm run dev
+npm i sass
+npm run dev
+history -w class0707.txt

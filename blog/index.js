@@ -121,6 +121,15 @@ const App = {
     this.components.formAddBtn.style.height = "30px";
     this.components.formAddBtn.style.cursor = "pointer";
 
+    this.components.formEditBtn.innerHTML = "Edit";
+    this.components.formEditBtn.style.marginTop = "5px";
+    this.components.formEditBtn.style.color = "black";
+    this.components.formEditBtn.style.fontSize = "20px";
+    this.components.formEditBtn.style.width = "100px";
+    this.components.formEditBtn.style.height = "30px";
+    this.components.formEditBtn.style.cursor = "pointer";
+
+
     //-----------------------------------------
 
 
@@ -199,13 +208,22 @@ const App = {
 
       // TODO:
       App.components.formAddBtn.onclick = function (evt) {
-        App.components.formContainer.style.display = "block";
-
+        
 
         App.posts.selectedPost = null;
 
         App.components.formTitleInput.value = ""
         App.components.formTextArea.value = ""
+      }
+
+
+      App.components.formEditBtn.onclick = function (evt) {
+        App.components.formContainer.style.display = "block";
+        if (App.posts.selectedPost) {
+    
+          const item = App.util.findPostById(App.posts.selectedPost.id)
+          console.log("found:", item)
+        } 
       }
 
       App.components.formCloseBtn.onclick = function (evt) {
@@ -219,7 +237,6 @@ const App = {
       // TODO:
       App.components.formSaveBtn.onclick = function (evt) {
         App.components.formContainer.style.display = "none";
-
         if (App.posts.selectedPost) {
           //edit ←今はつかってない
           const item = App.util.findPostById(App.posts.selectedPost.id)
@@ -232,7 +249,6 @@ const App = {
             App.components.menuLists[item.id].innerHTML = item.title
             App.components.bodyContainer.innerHTML = item.body
           }
-
         } else {
           //add new
           const item = {
@@ -250,6 +266,8 @@ const App = {
         }
       }
 
+      
+
 
       // TODO:
       App.components.deleteBodyAreaBtn.onclick = function (evt) {
@@ -259,15 +277,13 @@ const App = {
         App.components.deleteBodyAreaBtn.style.display = "none";
 
         // Remove from data object ←?
-        const idx = data.findIndex(function (item) {
+        const idx = App.util.findPostIndex(function (item) {
           return item.id === App.posts.selectedPost.id
         })
 
         if (idx > -1) {
           data.splice(idx, 1)
         }
-
-        
         // -----------
 
         // remove the element
@@ -338,6 +354,11 @@ const App = {
 
       this.formAddBtn = document.createElement("button");
       this.formAddBtnContainer.appendChild(this.formAddBtn);
+
+      this.formEditBtn = document.createElement("button");
+      this.formAddBtnContainer.appendChild(this.formEditBtn);
+
+
     },
 
     container: null,
@@ -360,6 +381,8 @@ const App = {
 
     formAddBtn: null,
 
+    formEditBtn: null,
+
     //TODO: なぜnullじゃダメなのか? そもそも上記でnullで宣言していく理由は?
     menuLists: {
     },
@@ -374,10 +397,8 @@ const App = {
           return item;
         }
       }
-
       return null;
     },
-
     findPostIndex: function (id) {
       for (let i = 0; i < data.length; i++) {
         const item = data[i];
@@ -385,23 +406,18 @@ const App = {
           return i;
         }
       }
-
       const x = 0;
       const y = null;
       if (!x) {
         // true
       }
-
       if (!y) {
         // true
       }
-
       const arr = [0, 1, 2, 3]
-
       console.log(arr[0]) // 0
       console.log(arr[-1]) // undefined
       console.log(arr[null]) // raise
-
       return -1;
     }
     // editPostById(id, title, body)

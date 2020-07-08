@@ -11,13 +11,13 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "npm run lint:js"
   },
-  
   "dependencies": {
     "@nuxtjs/axios": "^5.11.0",
     "dayjs": "^1.8.28",
-    "nuxt": "^2.13.0"
+    "nuxt": "^2.13.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.1"
   },
-
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
