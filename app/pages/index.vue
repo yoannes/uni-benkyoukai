@@ -1,15 +1,8 @@
 <template>
-<!-- 
-  1. Make edit button, open the modal, edit and save
-  2. Delete post
- -->
-
-
   <div class="about-class">
     <div class="menu">
       <span>Menu</span> <nuxt-link to="/about">About</nuxt-link>
     </div>
-
     <div>
       <input v-model="toggle" type="checkbox" />
       <label v-if="toggle">Show/Hide</label>
@@ -22,7 +15,7 @@
     <div @click="clickHandler2">{{ title }}</div>
     {{ clicked2 }}
     <div>selectedPost: {{selectedPost}}</div>
-    <div>study:{{ data[0].title }}</div>
+    <!-- <div>study:{{ data[0].title }}</div> -->
 
     <!-- <div
       v-for="n in [1,2,3,4,5,6,7,8,9,0]"
@@ -44,14 +37,19 @@
       <div class="container-menu">
         <!-- loop all datas and will append to menu -->
         <!-- ポイント!↓vueはこんなふうに短く書く、横に長くかかない -->
-        <div
+        <div v-if="this.data.length">
+          <div
           v-for="item in data"
           :key="item.id"
           class="container-menu-item"
           @click="selectedPost = item"
-        >
-          <div>{{ item.title }}</div> 
+          >
+            <div>{{ item.title }}</div> 
+          </div>
         </div>
+        <div v-else>
+          <div style="width: 200px">Menu list is empty.</div>
+        </div>  
       </div>
       <div class="container-body">
         <div id="bodyShowContentArea" class="body-show-content-area">{{showBody}}</div>
@@ -116,6 +114,8 @@ export default {
           body:
             "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
         }
+      ],
+      data2: [
       ],
       books: [
         {
@@ -190,13 +190,18 @@ export default {
       }
     },
     deleteHandler() {
-      console.log("delete-body-area-btn")
+      // console.log("deleting start")
       this.content.body = "";
-
-      this.data = this.data.filter(item => item.id !== this.selectedPost.id)
-     
+      if (this.data.length === 1) {
+        this.data = [];
+        console.log(this.data.length)
+      } else {
+        // 今selectedPostされていないitemだけをthis.dataに代入する(selectedPostされているitemだけを消す)
+        this.data = this.data.filter(item => item.id !== this.selectedPost.id)
+      }
       this.selectedPost = null;
       this.showModal = false;
+      // console.log("deleting finish")
     },
     findPostById(id) {
       for (let i = 0; i < this.data.length; i++) {
