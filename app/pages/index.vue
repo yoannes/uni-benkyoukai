@@ -1,8 +1,43 @@
 <template>
+  <!-- pages/index.vue はrootページ -->
+
   <div class="about-class">
-    <div class="menu">
-      <span>Menu</span> <nuxt-link to="/about">About</nuxt-link>
+
+    <Menu :title="title" />
+
+    <Button>
+      hello im a button
+    </Button>
+
+    <Container>      
+      <div class="container-menu">
+        <!-- loop all datas and will append to menu -->
+        <!-- ポイント!↓vueはこんなふうに短く書く、横に長くかかない -->
+        <div v-if="this.data.length">
+          <div
+          v-for="item in data"
+          :key="item.id"
+          class="container-menu-item"
+          @click="selectedPost = item"
+          >
+            <div>{{ item.title }}</div> 
+          </div>
+        </div>
+        <div v-else>
+          <div style="width: 200px">Menu list is empty.</div>
+        </div>  
+      </div>
+      <div class="container-body">
+        <div id="bodyShowContentArea" class="body-show-content-area">{{showBody}}</div>
+        <button v-if="selectedPost" class="delete-body-area-btn" @click="deleteHandler">x</button>
+      </div>
+    </Container>
+
+    <div class="btns-container">
+      <button class="btns-container-btn" @click="addBtnHandler">Add</button>
+      <button class="btns-container-btn" @click="editBtnHandler">Edit</button>
     </div>
+
     <div>
       <input v-model="toggle" type="checkbox" />
       <label v-if="toggle">Show/Hide</label>
@@ -33,29 +68,6 @@
       <div style="border: 1px solid blue">index: {{i}} id: {{b.id}} {{b.title}} {{b.price}}yen</div>
     </div>
     
-    <div class="container">
-      <div class="container-menu">
-        <!-- loop all datas and will append to menu -->
-        <!-- ポイント!↓vueはこんなふうに短く書く、横に長くかかない -->
-        <div v-if="this.data.length">
-          <div
-          v-for="item in data"
-          :key="item.id"
-          class="container-menu-item"
-          @click="selectedPost = item"
-          >
-            <div>{{ item.title }}</div> 
-          </div>
-        </div>
-        <div v-else>
-          <div style="width: 200px">Menu list is empty.</div>
-        </div>  
-      </div>
-      <div class="container-body">
-        <div id="bodyShowContentArea" class="body-show-content-area">{{showBody}}</div>
-        <button v-if="selectedPost" class="delete-body-area-btn" @click="deleteHandler">x</button>
-      </div>
-    </div>
     <div v-if="showModal" class="form-container" >
       <input v-model="content.title" class="form-title-input"  />
       <textarea v-model="content.body" class="form-text-area" placeholder="Text area body"  />
@@ -67,10 +79,9 @@
         <button class="form-cancel-btn">CANCEL</button>
       </div>
     </div>
-    <div class="btns-container">
-      <button class="btns-container-btn" @click="addBtnHandler">Add</button>
-      <button class="btns-container-btn" @click="editBtnHandler">Edit</button>
-    </div>
+
+
+
   </div>
 </template>
 <script>
@@ -86,13 +97,44 @@
 // original string. no more relation to data[1]
 // selectedPost = "slslsls"
 
-const arr = [1, 2, 3, 2, 3, 2]
-console.log(arr)
+// const arr = [1, 2, 3, 2, 3, 2]
+// console.log(arr)
 
-const newArr = arr.filter(x => x === 3)
-console.log(newArr)
+// const newArr = arr.filter(x => x === 3)
+// console.log(newArr)
+
+// const newArr2 = arr.filter(x => x !== 4)
+// console.log(newArr2)
+
+// const x = ""
+// if (x) {
+//   // no
+// }
+
+// const x = "a"
+// if (x) {
+//   // yes
+// }
+
+// const x = "1"
+// if (x === 1) {
+//   // no
+// }
+// if (x == 1) {
+//   // yes. Bad!
+// }
+
+import Button from "~/components/Button.vue"
+import Menu from "~/components/Menu.vue"
+import Container from "~/components/Container.vue"
 
 export default {
+  components: {
+    Button,
+    Menu,
+    Container
+  },
+  
   // State
   data() {
     return {
@@ -241,16 +283,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.menu {
-  display: flex;
-}
-.container {
-  display: flex;
-  border: solid;
-  color: orange;
-  width: 1000px;
-  height: 600px;
-}
 .contaier-menu {
   border: 1px solid green;
   overflow-y: auto;
