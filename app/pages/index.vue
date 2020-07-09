@@ -76,6 +76,24 @@
   </div>
 </template>
 <script>
+
+// let selectedPost = null;
+
+// Click 1st option
+// selectedPost = data[1]
+
+// selected.title = "new title"
+// selected.body = "new body"
+
+// original string. no more relation to data[1]
+// selectedPost = "slslsls"
+
+const arr = [1, 2, 3, 2, 3, 2]
+console.log(arr)
+
+const newArr = arr.filter(x => x === 3)
+console.log(newArr)
+
 export default {
   // State
   data() {
@@ -111,7 +129,7 @@ export default {
           price: 800
         }
       ],
-      selectedPost: null,
+      selectedPost: null, // *data[1]
       showModal: false,
       showDelete: false,
       content: {
@@ -136,16 +154,15 @@ export default {
     addHandler() {
       console.log("add", this.content.title, this.content.body);
       if (this.selectedPost) {
-        const item = this.findPostById(this.selectedPost.id)
-        console.log("found:", item)
-        if (item) {
-          item.title = this.content.title
-          item.body = this.content.body
+        // Edit content (pointerZone) : selectedPost points to data[i]
+        this.selectedPost.title = this.content.title
+        this.selectedPost.body = this.content.body
 
-          // kind of push/render, re-render
-          this.data[item.id].innerHTML = item.title
-          // this.bodyShowContentArea.innerHTML = item.body
-        }
+        // Set to null so wont have any selected anymore
+        this.selectedPost = null
+
+        // Close modal
+        this.showModal = false
       } else {
         // add new
         // ポイント!
@@ -175,24 +192,11 @@ export default {
     deleteHandler() {
       console.log("delete-body-area-btn")
       this.content.body = "";
-      // Remove from data object ←?
-      const idx = this.findPostIndex(function (item) {
-        return item.id === this.selectedPost.id
-      })
-      if (idx > -1) {
-        this.data.splice(idx, 1)
-      }
-      // remove the element 
-      // this.data[this.selectedPost.id].remove()
-      // this.data.$remove(this.selectedPost.id)
-      // console.log("remove:", this.data[this.selectedPost.id])
-      // Delete from object
-      // delete this.data[this.selectedPost.id]
-      this.$delete(this.data, this.selectedPost.id)
-      console.log("delete:", this.data[this.selectedPost.id])
-      // Clear the selected post
+
+      this.data = this.data.filter(item => item.id !== this.selectedPost.id)
+     
       this.selectedPost = null;
-      this.selectedPost = false;
+      this.showModal = false;
     },
     findPostById(id) {
       for (let i = 0; i < this.data.length; i++) {
