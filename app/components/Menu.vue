@@ -3,10 +3,10 @@
     <div>
       {{ title }}
     </div>
-    <span>Menu</span> <nuxt-link to="/about">About</nuxt-link>
+    <span>Menu</span>
+    <nuxt-link to="/about">About</nuxt-link>
   </div>
 </template>
-
 <script>
 export default {
   props: {
@@ -15,7 +15,6 @@ export default {
       default: null
     }
   },
-
   data() {
     return {}
   }

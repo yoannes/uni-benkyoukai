@@ -2,15 +2,12 @@
   <!-- pages/index.vue はrootページ -->
 
   <div class="about-class">
-
     <Menu :title="title" />
-
     <Button>
       hello im a button
     </Button>
-
     <Container>      
-      <div class="container-menu">
+      <ContainerMenu>
         <!-- loop all datas and will append to menu -->
         <!-- ポイント!↓vueはこんなふうに短く書く、横に長くかかない -->
         <div v-if="this.data.length">
@@ -18,26 +15,24 @@
           v-for="item in data"
           :key="item.id"
           class="container-menu-item"
-          @click="selectedPost = item"
-          >
+          @click="selectedPost = item" 
+         >
             <div>{{ item.title }}</div> 
           </div>
         </div>
         <div v-else>
           <div style="width: 200px">Menu list is empty.</div>
         </div>  
-      </div>
-      <div class="container-body">
+      </ContainerMenu>
+      <ContainerBody>
         <div id="bodyShowContentArea" class="body-show-content-area">{{showBody}}</div>
         <button v-if="selectedPost" class="delete-body-area-btn" @click="deleteHandler">x</button>
-      </div>
+      </ContainerBody>
     </Container>
-
-    <div class="btns-container">
+    <BtnsContainer>
       <button class="btns-container-btn" @click="addBtnHandler">Add</button>
       <button class="btns-container-btn" @click="editBtnHandler">Edit</button>
-    </div>
-
+    </BtnsContainer>
     <div>
       <input v-model="toggle" type="checkbox" />
       <label v-if="toggle">Show/Hide</label>
@@ -85,54 +80,21 @@
   </div>
 </template>
 <script>
-
-// let selectedPost = null;
-
-// Click 1st option
-// selectedPost = data[1]
-
-// selected.title = "new title"
-// selected.body = "new body"
-
-// original string. no more relation to data[1]
-// selectedPost = "slslsls"
-
-// const arr = [1, 2, 3, 2, 3, 2]
-// console.log(arr)
-
-// const newArr = arr.filter(x => x === 3)
-// console.log(newArr)
-
-// const newArr2 = arr.filter(x => x !== 4)
-// console.log(newArr2)
-
-// const x = ""
-// if (x) {
-//   // no
-// }
-
-// const x = "a"
-// if (x) {
-//   // yes
-// }
-
-// const x = "1"
-// if (x === 1) {
-//   // no
-// }
-// if (x == 1) {
-//   // yes. Bad!
-// }
-
 import Button from "~/components/Button.vue"
 import Menu from "~/components/Menu.vue"
 import Container from "~/components/Container.vue"
+import ContainerMenu from "~/components/ContainerMenu.vue"
+import ContainerBody from "~/components/ContainerBody.vue"
+import BtnsContainer from "~/components/BtnsContainer.vue"
 
 export default {
   components: {
     Button,
     Menu,
-    Container
+    Container,
+    ContainerMenu,
+    ContainerBody,
+    BtnsContainer
   },
   
   // State
@@ -221,12 +183,12 @@ export default {
       }
     },
     editBtnHandler() {
-      this.content.title = "";
-      this.content.body = "";
-      console.log("selectedPostId", this.selectedPost.id);
-      console.log("edit", this.content.title, this.content.body);
-      this.showModal = true;
       if (this.selectedPost) {
+        this.content.title = "";
+        this.content.body = "";
+        console.log("selectedPostId", this.selectedPost.id);
+        console.log("edit", this.content.title, this.content.body);
+        this.showModal = true;
         const item = this.findPostById(this.selectedPost.id)
         console.log("found:", item)
       }
@@ -283,29 +245,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.contaier-menu {
-  border: 1px solid green;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border: solid;
-  color: black;
-  width: 200px;
-  height: 600px;
-}
 .container-menu-item {
-  border: 1px solid green;
+  border: 3px solid green;
   width: 200px;
   height: 50px;
   overflow: hidden;
   cursor: pointer;
-}
-.container-body {
-  border: 1px solid red;
-  border: solid;
-  color: blue;
-  width: 800px;
-  height: 600px;
-  position: relative;
 }
 .body-show-content-area {
   border: solid;
@@ -328,7 +273,7 @@ export default {
 }
 .form-container {
   position: absolute;
-  top: 500px; /* check */
+  top: 0; /* check */
   left: 0;
   right: 0;
   bottom: 0;
@@ -391,14 +336,6 @@ export default {
   width: 100px;
   height: 20px;
   cursor: pointer;
-}
-.btns-container {
-  margin-top: 5px;
-  border: solid;
-  color: white;
-  width: 230px;
-  height: 50px;
-  text-align:center;
 }
 .btns-container-btn {
   margin-top: 5px;

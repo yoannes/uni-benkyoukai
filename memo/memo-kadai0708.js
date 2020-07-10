@@ -50,3 +50,55 @@ add(a, b) {
 introduce(name) {
   return `My name is ${name}!`;
 }
+
+
+
+
+// 4
+
+
+const x = ""
+if (x) {
+  // no
+}
+
+const x = "a"
+if (x) {
+  // yes
+}
+
+const x = "1"
+if (x === 1) {
+  // no
+}
+if (x == 1) {
+  // yes. Bad!
+}
+
+
+
+
+//5
+
+let selectedPost = null;
+
+//Click 1st option
+selectedPost = data[1]
+
+selected.title = "new title"
+selected.body = "new body"
+
+//original string. no more relation to data[1]
+selectedPost = "slslsls"
+
+
+
+//6
+const arr = [1, 2, 3, 2, 3, 2]
+console.log(arr)
+
+const newArr = arr.filter(x => x === 3)
+console.log(newArr)
+
+const newArr2 = arr.filter(x => x !== 4)
+console.log(newArr2)
