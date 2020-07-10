@@ -23,6 +23,7 @@ module.exports = {
     "no-trailing-spaces": "off",
     "vue/no-multi-spaces": "off",
     "vue/mustache-interpolation-spacing": "off",
+    "arrow-parens": "off",
     "quotes": ["error", "double"]
   }
 }

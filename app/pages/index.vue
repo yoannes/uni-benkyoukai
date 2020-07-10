@@ -4,26 +4,11 @@
   <div class="about-class">
     <Menu :title="title" />
     <Button @myEvent="addBtnHandler">
-      hello im a button
+      {{$t("hello")}} {{$t("you")}}
     </Button>
     <Container>      
-      <Container-menu>
-        <!-- loop all datas and will append to menu -->
-        <!-- ポイント!↓vueはこんなふうに短く書く、横に長くかかない -->
-        <div v-if="this.data.length">
-          <div
-          v-for="item in data"
-          :key="item.id"
-          class="container-menu-item"
-          @click="selectedPost = item" 
-         >
-            <div>{{ item.title }}</div> 
-          </div>
-        </div>
-        <div v-else>
-          <div style="width: 200px">Menu list is empty.</div>
-        </div>  
-      </Container-menu>
+      <Container-menu :data="data" @asdf="menuClickHandler" />
+
       <Container-body>
         <div class="body-show-content-area">{{showBody}}</div>
         <button v-if="selectedPost" class="delete-body-area-btn" @click="deleteHandler">x</button>
@@ -33,6 +18,18 @@
       <button class="btns-container-btn" @click="addBtnHandler">Add</button>
       <button class="btns-container-btn" @click="editBtnHandler">Edit</button>
     </Btns-container>
+
+
+    {{lang}}
+    <Button @myEvent="languageHandler('ja')">
+      {{ $t("japanese")}}
+    </Button>
+
+    <Button @myEvent="languageHandler('en')">
+      {{ $t("english")}}
+    </Button>
+
+
     <div>
       <input v-model="toggle" type="checkbox" />
       <label v-if="toggle">Show/Hide</label>
@@ -55,12 +52,15 @@
       <div style="border: 1px solid black">now at: {{ n }}</div>
     </div>   -->
 
+
+
+
     <div
       v-for="(b, i) in books"
       :key="i"
       style="margin: 10px"
-    >
-      <div style="border: 1px solid blue">index: {{i}} id: {{b.id}} {{b.title}} {{b.price}}yen</div>
+    >      
+      <div style="border: 1px solid blue">{{ $t(i, b.id, b.title, b.price) }}</div>
     </div>
     <div v-if="showModal" class="form-container" >
       <input v-model="content.title" class="form-title-input"  />
@@ -85,6 +85,8 @@ import Container from "~/components/Container.vue"
 import ContainerMenu from "~/components/ContainerMenu.vue"
 import ContainerBody from "~/components/ContainerBody.vue"
 import BtnsContainer from "~/components/BtnsContainer.vue"
+import { setLang } from "~/plugins/i18n"
+
 
 export default {
   components: {
@@ -138,10 +140,17 @@ export default {
       content: {
         title: null,
         body: null
-      }
+      },
+      lang: "ja"
     };
   },
   methods: {
+    languageHandler(newLang) {
+      console.log("New language", newLang)
+      setLang(newLang)
+      this.lang = newLang
+    },
+
     clickHandler(item) {
       console.log(item);
     },
@@ -223,6 +232,10 @@ export default {
         }
       }
       return -1;
+    },
+
+    menuClickHandler(item) {       
+      this.selectedPost = item;
     }
   },
   computed: {
@@ -244,13 +257,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container-menu-item {
-  border: 3px solid green;
-  width: 200px;
-  height: 50px;
-  overflow: hidden;
-  cursor: pointer;
-}
+
 .body-show-content-area {
   border: solid;
   color: red;
