@@ -11,7 +11,7 @@ export default {}
 <style scoped>
 .btns-container {
   margin-top: 5px;
-  border: 1px solid;
+  border: 1px solid white;
   width: 230px;
   height: 50px;
   text-align:center;

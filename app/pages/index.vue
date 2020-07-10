@@ -3,11 +3,11 @@
 
   <div class="about-class">
     <Menu :title="title" />
-    <Button>
+    <Button @myEvent="addBtnHandler">
       hello im a button
     </Button>
     <Container>      
-      <ContainerMenu>
+      <Container-menu>
         <!-- loop all datas and will append to menu -->
         <!-- ポイント!↓vueはこんなふうに短く書く、横に長くかかない -->
         <div v-if="this.data.length">
@@ -23,16 +23,16 @@
         <div v-else>
           <div style="width: 200px">Menu list is empty.</div>
         </div>  
-      </ContainerMenu>
-      <ContainerBody>
-        <div id="bodyShowContentArea" class="body-show-content-area">{{showBody}}</div>
+      </Container-menu>
+      <Container-body>
+        <div class="body-show-content-area">{{showBody}}</div>
         <button v-if="selectedPost" class="delete-body-area-btn" @click="deleteHandler">x</button>
-      </ContainerBody>
+      </Container-body>
     </Container>
-    <BtnsContainer>
+    <Btns-container>
       <button class="btns-container-btn" @click="addBtnHandler">Add</button>
       <button class="btns-container-btn" @click="editBtnHandler">Edit</button>
-    </BtnsContainer>
+    </Btns-container>
     <div>
       <input v-model="toggle" type="checkbox" />
       <label v-if="toggle">Show/Hide</label>
@@ -62,7 +62,6 @@
     >
       <div style="border: 1px solid blue">index: {{i}} id: {{b.id}} {{b.title}} {{b.price}}yen</div>
     </div>
-    
     <div v-if="showModal" class="form-container" >
       <input v-model="content.title" class="form-title-input"  />
       <textarea v-model="content.body" class="form-text-area" placeholder="Text area body"  />
