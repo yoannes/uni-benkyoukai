@@ -1,8 +1,8 @@
 <template>
   <div class="container-body">
-    <div class="body-show-content-area">{{ showBody }}</div>
+    <div class="body-show-content-area">{{ fgh }}</div>
     <button
-    v-if="selectedPost"
+    v-if="fgh2"
     class="delete-body-area-btn"
     @click="$emit('asdf2')"
     >x</button>
@@ -13,14 +13,14 @@
 <script>
 export default {
   props: {
-    selectedPost: {
+    fgh: {
       type: String,
       default: null
     },
-    showBody: {
+    fgh2: {
       type: String,
       default: null
-    }    
+    }
   }
 }
 </script>

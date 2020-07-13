@@ -8,7 +8,7 @@
     </Button>
     <Container>      
       <Container-menu :data="data" @asdf="menuClickHandler" />
-      <Container-body :showBody="showBody" @asdf2="deleteHandler" />
+      <Container-body :fgh="showBody" :fgh2="selectedPost" @asdf2="deleteHandler" />
     </Container>
     <Btns-container @asdf3="addBtnHandler" @asdf4="editBtnHandler"/>
 

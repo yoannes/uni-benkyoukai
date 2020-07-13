@@ -19,7 +19,7 @@ export default {
 <style scoped>
 div{
     border: 1px solid red;
-    height: 200px;
+    height: 150px;
 }
 h2{
     color: red

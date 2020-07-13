@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h1>{{ title }}</h1>
-        <p>{{ text }}</p>
+        <p>{{ asd }}</p>
         <p>Welcome! {{ username }}さん</p>
+        <p>{{ asd }} {{ username }} Lennon</p>
     </div>
 </template>
 
@@ -10,11 +10,10 @@
 export default {
     data(){
         return {
-            title: "Header",
-            text: "Hello Vue.js!"
         }
     },
     props: {
+        asd: String,
         username: String
     }
 }
@@ -22,13 +21,13 @@ export default {
 
 <style scoped>
 div{
-    border: 1px solid blue;
-    height: 100px;
+    border: 1px solid green;
+    height: 80px;
 }
-h1{
-    color: blue
+h3{
+    color: green
 }
 p{
-    color:blue
+    color: green
 }
 </style>
