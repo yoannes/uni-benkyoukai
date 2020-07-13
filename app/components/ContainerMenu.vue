@@ -13,11 +13,10 @@
       </div>
     </div>
     <div v-else>
-      <div style="width: 200px">Menu list is empty.</div>
+      <div style="width: 200px">{{$t("empty")}}</div>
     </div>  
   </div>
 </template>
-
 <script>
 export default {
   props: {
@@ -28,7 +27,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .contaier-menu {
   border: 1px solid orange;

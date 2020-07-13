@@ -1,15 +1,21 @@
-let lang = "ja";
+let lang = "en";
 
 const list = {
   hello: { ja: "こんにちは", en: "hello" },
   you: { ja: "あなた", en: "you" },
   japanese: { ja: "日本語", en: "Japanese" },
   english: { ja: "英語", en: "English" },
-
   asd: { 
     ja: (a, b, c, d) => `インデックス: ${a} id: ${b} ${c} ${d}円`,
     en: (a, b, c, d) => `index: ${a} id: ${b} ${c} ${d}yen`
   },
+
+  // kadaiFor0713↓
+  empty: { ja: "メニューリストは空です", en: "Menu list is empty" },
+  add: { ja: "追加", en: "Add" },
+  edit: { ja: "編集", en: "Edit" },
+
+
 
   date_date: { ja: "yyyy/m/d" },
   date_shortDate: { ja: "m/d" },

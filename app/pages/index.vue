@@ -8,17 +8,27 @@
     </Button>
     <Container>      
       <Container-menu :data="data" @asdf="menuClickHandler" />
-
-      <Container-body>
-        <div class="body-show-content-area">{{showBody}}</div>
-        <button v-if="selectedPost" class="delete-body-area-btn" @click="deleteHandler">x</button>
-      </Container-body>
+      <Container-body :showBody="showBody" @asdf2="deleteHandler" />
     </Container>
-    <Btns-container>
-      <button class="btns-container-btn" @click="addBtnHandler">Add</button>
-      <button class="btns-container-btn" @click="editBtnHandler">Edit</button>
-    </Btns-container>
+    <Btns-container @asdf3="addBtnHandler" @asdf4="editBtnHandler"/>
 
+    <div>
+      <p>Hello</p>
+      <p v-pre>{{ message }} World</p>
+      <p v-text="message"></p>
+      <p v-text="message">ハロー</p>
+      <p v-html="message2"></p>
+      <p style="color: red">りんご</p>
+      <a href="https://www.google.com/?hl=ja">google</a>
+      <a v-bind:href="url">google2</a>
+      <a :href="url">google3</a>
+      <p>{{ title2 }}</p>
+      <p :title="title2">{{ title2 }}</p>
+      <p :title2="title2">{{ title2 }}</p>
+      <p>{{ message3 }}</p>
+      <button v-on:click="reverse">reverse</button>
+      <button @click="reverse">reverse2</button>
+    </div>
 
     {{lang}}
     <Button @myEvent="languageHandler('ja')">
@@ -101,7 +111,12 @@ export default {
   // State
   data() {
     return {
+      url: "https://www.google.com/?hl=ja",
+      message: "Hello",
+      message2: "<h1>Hello2</h1>",
+      message3: "message3",
       title: "Super title",
+      title2: "Super title2",
       clicked: 0,
       clicked2: 0,
       toggle: true,
@@ -145,12 +160,14 @@ export default {
     };
   },
   methods: {
+    reverse() {
+      this.message3 = "3egassem"
+    },
     languageHandler(newLang) {
       console.log("New language", newLang)
       setLang(newLang)
       this.lang = newLang
     },
-
     clickHandler(item) {
       console.log(item);
     },
@@ -233,8 +250,7 @@ export default {
       }
       return -1;
     },
-
-    menuClickHandler(item) {       
+    menuClickHandler(item) {
       this.selectedPost = item;
     }
   },
@@ -257,26 +273,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
-.body-show-content-area {
-  border: solid;
-  color: red;
-  width: 800px;
-  height: 560px;
-}
-.delete-body-area-btn {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: black;
-  background-color: red;
-  font-size: 20px;
-  width: 100px;
-  height: 30px;
-  cursor: pointer;
-  display: block;
-  /* display: none; */
-}
 .form-container {
   position: absolute;
   top: 0; /* check */
@@ -341,15 +337,6 @@ export default {
   font-size: 10px;
   width: 100px;
   height: 20px;
-  cursor: pointer;
-}
-.btns-container-btn {
-  margin-top: 5px;
-  color: black;
-  font-size: 20px;
-  width: 100px;
-  height: 30px;
-  display: inline-block;
   cursor: pointer;
 }
 </style>

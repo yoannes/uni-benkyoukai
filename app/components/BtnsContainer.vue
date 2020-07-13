@@ -1,6 +1,13 @@
 <template>
   <div class="btns-container">
-    <slot/>
+    <button
+    class="btns-container-btn"
+    @click="$emit('asdf3')"
+    >{{$t("add")}}</button>
+    <button
+    class="btns-container-btn"
+    @click="$emit('asdf4')"
+    >{{$t("edit")}}</button>
   </div>
 </template>
 
@@ -15,5 +22,14 @@ export default {}
   width: 230px;
   height: 50px;
   text-align:center;
+}
+.btns-container-btn {
+  margin-top: 5px;
+  color: black;
+  font-size: 20px;
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  cursor: pointer;
 }
 </style>
