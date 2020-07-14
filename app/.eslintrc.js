@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     "vue/html-self-closing": "off",
     "semi": "off",
+    "comma-spacing": "off",
     "no-multiple-empty-lines": "off",
     "vue/singleline-html-element-content-newline": "off",
     "space-before-function-paren": "off",

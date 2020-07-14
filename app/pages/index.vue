@@ -8,9 +8,20 @@
     </Button>
     <Container>      
       <Container-menu :data="data" @asdf="menuClickHandler" />
-      <Container-body :fgh="showBody" :fgh2="selectedPost" @asdf2="deleteHandler" />
+      <Container-body :showBody="showBody" :selectedPost="selectedPost" @asdf2="deleteHandler" />
     </Container>
     <Btns-container @asdf3="addBtnHandler" @asdf4="editBtnHandler"/>
+    <div v-if="showModal" class="form-container" >
+      <input v-model="content.title" class="form-title-input"  />
+      <textarea v-model="content.body" class="form-text-area" placeholder="Text area body"  />
+      <button class="form-close-btn" @click="showModal = false">x</button>
+      title: {{content.title}};
+      body: {{content.body}}
+      <div class="save-cancel-btns-container">
+        <button class="form-save-btn" @click="addHandler">SAVE</button>
+        <button class="form-cancel-btn" @click="showModal = false">CANCEL</button>
+      </div>
+    </div>
 
     <div>
       <p>Hello</p>
@@ -62,9 +73,6 @@
       <div style="border: 1px solid black">now at: {{ n }}</div>
     </div>   -->
 
-
-
-
     <div
       v-for="(b, i) in books"
       :key="i"
@@ -72,20 +80,6 @@
     >      
       <div style="border: 1px solid blue">{{ $t(i, b.id, b.title, b.price) }}</div>
     </div>
-    <div v-if="showModal" class="form-container" >
-      <input v-model="content.title" class="form-title-input"  />
-      <textarea v-model="content.body" class="form-text-area" placeholder="Text area body"  />
-      <button class="form-close-btn" @click="showModal = false">x</button>
-      title: {{content.title}};
-      body: {{content.body}}
-      <div class="save-cancel-btns-container">
-        <button class="form-save-btn" @click="addHandler">SAVE</button>
-        <button class="form-cancel-btn">CANCEL</button>
-      </div>
-    </div>
-
-
-
   </div>
 </template>
 <script>
@@ -96,6 +90,17 @@ import ContainerMenu from "~/components/ContainerMenu.vue"
 import ContainerBody from "~/components/ContainerBody.vue"
 import BtnsContainer from "~/components/BtnsContainer.vue"
 import { setLang } from "~/plugins/i18n"
+
+
+// beforeCreate()
+
+// const a = document.createElement("div") // aはあるけど、userからは、みえない
+
+// beforeMount() 
+
+// document.appendChild(a) // equals to mount // ↓ userから、みえる
+
+// created()
 
 
 export default {
@@ -119,22 +124,7 @@ export default {
       title2: "Super title2",
       clicked: 0,
       clicked2: 0,
-      toggle: true,
-      data: [
-        {
-          id: 1,
-          title:
-            "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-          body:
-            "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-        },
-        {
-          id: 2,
-          title: "qui est esse",
-          body:
-            "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-        }
-      ],
+      toggle: true,      
       data2: [
       ],
       books: [
@@ -159,6 +149,28 @@ export default {
       lang: "ja"
     };
   },
+
+  created() {
+    console.log("Index created")
+    console.log("Store", this.$store.state)
+    // const Store = {
+    //   state: {
+    //     posts: []
+    //   },
+    //   mutations: {
+    //     add: function(item) {
+    //       Store.state.posts.push(item)
+    //     }
+    //   }
+    // }
+
+    // javascript: Store.mutaions.add({a:1})
+    // vuex:       this.$store.commit("addPost", newItem)
+
+    // javascript: Store.state.posts
+    // vuex:       this.$store.state.posts
+  },
+
   methods: {
     reverse() {
       this.message3 = "3egassem"
@@ -201,7 +213,9 @@ export default {
           body: this.content.body
         };
         // ポイント!
-        this.data.push(newItem);
+        // this.data.push(newItem);
+        this.$store.commit("addPost", newItem)
+
         this.showModal = false;
         // ポイント!
         this.selectedPost = newItem
@@ -210,12 +224,15 @@ export default {
     editBtnHandler() {
       if (this.selectedPost) {
         this.content.title = "";
+        // this.$store.commit("editPost")
         this.content.body = "";
-        console.log("selectedPostId", this.selectedPost.id);
-        console.log("edit", this.content.title, this.content.body);
+        // this.$store.commit("editPost", "")
+
+        // console.log("selectedPostId", this.selectedPost.id);
+        // console.log("edit", this.content.title, this.content.body);
         this.showModal = true;
-        const item = this.findPostById(this.selectedPost.id)
-        console.log("found:", item)
+        // const item = this.findPostById(this.selectedPost.id)
+        // console.log("found:", item)
       }
     },
     deleteHandler() {
@@ -223,7 +240,7 @@ export default {
       this.content.body = "";
       if (this.data.length === 1) {
         this.data = [];
-        console.log(this.data.length)
+        // console.log(this.data.length)
       } else {
         // 今selectedPostされていないitemだけをthis.dataに代入する(selectedPostされているitemだけを消す)
         this.data = this.data.filter(item => item.id !== this.selectedPost.id)
@@ -255,6 +272,12 @@ export default {
     }
   },
   computed: {
+    data() {      
+      return this.$store.state.data
+    },
+    // content() {      
+    //   return this.$store.state.content
+    // },
     showTitle() {
       if (this.selectedPost) {
         return this.selectedPost.title;
