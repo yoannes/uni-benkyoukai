@@ -14,6 +14,11 @@ export const state = () => ({
       title: "qui est esse",
       body:
         "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+    },
+    {
+      id: 3,
+      title: "Title 3",
+      body: "Body 3"
     }
   ]
   // content: {
@@ -26,12 +31,26 @@ export const mutations = {
   //      state  payload
   addPost(state, item) {    
     state.data.push(item)    
+  },
+
+  editPost(state, newItem) {
+    // newItem =  { id: 3, title: "new title", body: "new body" }
+
+    // 1. Method
+    for (let i = 0; i < state.data.length; i++) {
+      const item = state.data[i];
+      if (item.id === newItem.id) {
+        state.data[i] = newItem
+      }
+    }
+
+    // 2. Method
+    state.data = state.data.map(item => {
+      if (item.id === newItem.id) {
+        return newItem;
+      }
+      return item;
+    })    
   }
-  // editPost(state, item) {
-  //   state.content.title = ""
-  //   state.content.body = ""
-  // },
-  // deletePost(state, item) {
-    
-  // }
 }
+

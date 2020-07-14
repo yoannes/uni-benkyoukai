@@ -139,7 +139,7 @@ export default {
           price: 800
         }
       ],
-      selectedPost: null, // *data[1]
+      selectedPost: null, // { id: 3, title: "Title 3", body: "Body 3" }
       showModal: false,
       showDelete: false,
       content: {
@@ -193,11 +193,15 @@ export default {
       this.content.body = "";
     },
     addHandler() {
-      console.log("add", this.content.title, this.content.body);
-      if (this.selectedPost) {
-        // Edit content (pointerZone) : selectedPost points to data[i]
-        this.selectedPost.title = this.content.title
-        this.selectedPost.body = this.content.body
+      // console.log("add", this.content.title, this.content.body);
+      if (this.selectedPost) {        
+        const newItem = {
+          id: this.selectedPost.id,
+          title: this.content.title, 
+          body: this.content.body
+        }
+
+        this.$store.commit("editPost", newItem)
 
         // Set to null so wont have any selected anymore
         this.selectedPost = null
@@ -221,6 +225,7 @@ export default {
         this.selectedPost = newItem
       }
     },
+    // 3 EDIT
     editBtnHandler() {
       if (this.selectedPost) {
         this.content.title = "";
@@ -271,6 +276,7 @@ export default {
       this.selectedPost = item;
     }
   },
+
   computed: {
     data() {      
       return this.$store.state.data
